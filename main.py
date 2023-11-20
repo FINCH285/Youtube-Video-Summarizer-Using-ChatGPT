@@ -11,6 +11,7 @@ def extract_youtube_video_id(url: str) -> str | None:
         return match.group(1)
     return None
 
+
 def get_video_transcript(video_id: str) -> str | None:
     """Gets the transcript of a YouTube video by its ID."""
     try:
@@ -23,7 +24,9 @@ def get_video_transcript(video_id: str) -> str | None:
         return None
 
     text = " ".join([line["text"] for line in transcript])
+
     return text
+
 
 def generate_summary(text: str) -> str:
     """Generates a summary using OpenAI GPT-3.5-turbo model."""
@@ -43,6 +46,7 @@ def generate_summary(text: str) -> str:
     )
     return response.choices[0].message.content.strip()
 
+
 def summarize_youtube_video(video_url: str) -> str:
     """Summarizes a YouTube video using its URL."""
     video_id = extract_youtube_video_id(video_url)
@@ -56,7 +60,8 @@ def summarize_youtube_video(video_url: str) -> str:
     summary = generate_summary(transcript)
     return summary
 
+
 if __name__ == '__main__':
-    youtube_url = "https://www.youtube.com/watch?v=J-3zlPVQJqc&t=14s"
+    youtube_url = "paste our YouTube URL here"
     result = summarize_youtube_video(youtube_url)
     print(result)
